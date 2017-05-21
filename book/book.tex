@@ -20,6 +20,7 @@
 \usepackage{ifthen}
 \usepackage{bm}
 \usepackage{hyperref}
+\usepackage{bookmark}
 
 %% Add pdf metadata here
 \hypersetup{
@@ -30,28 +31,21 @@
     ps2pdf,
 }
 
-%% Packages for adding bookmarks to generated pdf file
-\usepackage{bookmark}
+%% Macros and redefinitions
 
-% load package with ``framed'' and ``numbered'' option.
-%\usepackage[framed,autolinebreaks,useliterate]{mcode}
-
+% Generate the registered trademark symbol
 \newcommand{\myreg}{\textsuperscript{{\tiny \textregistered}}}
-
-
-\sloppy
-
-\pagestyle{fancyplain}
 
 % Use name 'Table of Contents' (vs 'Contents')
 \renewcommand{\contentsname}{Table of Contents}
 
-% Define vector, unit vectors, and abs value bars for magnitude here
+% Use bold style for vectors
 \renewcommand{\vec}[1]{\bm{\mathbf{#1}}}
-% Complexity needed to display i_hat and j_hat correctly
+
+% Define style for unit vectors. Complexity needed to display i_hat and
+% j_hat correctly
 \newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
 \newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
-
 \newcommand{\uvec}[1]{%
     \ifthenelse{\equal{#1}{i}}%
         {\uveci}{%
@@ -60,7 +54,7 @@
     {\bm{\hat{\mathbf{#1}}}}% default case
 }}}
 
-% This doesn't make the argument bold, just adds the bars
+% Define style for the norm of a vector
 \newcommand{\norm}[1]{\lvert #1 \rvert}
 
 % Create an "array" for the 9 theorems of debugging. Depends on ifthen
@@ -96,16 +90,29 @@
     {}% default case
 }}}}}}}}}}% all the closing braces for displaythrm
 
+% Define the title and version in one place here
+\newcommand{\thetitle}{Physical Modeling in MATLAB\myreg}
+\newcommand{\theversion}{2.1.0}
+
+% TODO: add documentation here - what does this do?
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}{}}
+
+% TODO: add documentation here - what does this do?
+\renewcommand\MakeUppercase{}
+
+%% End of macros+redfinitions
+
+
+\sloppy
+
+\pagestyle{fancyplain}
 
 \lhead[\fancyplain{}{\bfseries\thepage}]%
       {\fancyplain{}{\bfseries\rightmark}}
 \rhead[\fancyplain{}{\bfseries\leftmark}]%
       {\fancyplain{}{\bfseries\thepage}}
 \cfoot{}
-
-\renewcommand\MakeUppercase{}
 
 \newenvironment{code}{\vspace{0.0\parskip} \begin{lstlisting}}{\end{lstlisting} \vspace{0.0\parskip}}
 
@@ -121,33 +128,17 @@
   {\imgsrc[ALT="Next"]{next.png}}
 
 \makeindex
-
 \begin{document}
-
 \frontmatter
 
-%\blankpage
-%\blankpage
-
-\newcommand{\thetitle}{Physical Modeling in MATLAB\myreg}
-\newcommand{\theversion}{2.0.1}
 \title {\thetitle}
 \author {Allen B. Downey \\\\\\\\
 Version 2.x Contributor\\\\
 W. Craig Scratchley\\}
-\date {Version \theversion \\
-%\today
-January, 2017
-}
-
-
+\date {Version \theversion}
 
 \input{latexonly}
-
 \begin{latexonly}
-
-%\blankpage
-%\blankpage
 
 % TITLE PAGES FOR LATEX VERSION
 
@@ -159,6 +150,8 @@ January, 2017
 {\Large \thetitle}
 
 \vspace{0.25in}
+
+% LICENSE PAGE FOR LATEX VERSION
 
 Copyright 2014 Allen B. Downey
 \end{center}
@@ -175,13 +168,9 @@ Permission is granted to copy, distribute, and/or modify this document
 under the terms of the Creative Commons Attribution-NonCommercial 3.0 Unported
 License, which is available at \url{http://creativecommons.org/licenses/by-nc/3.0/}.
 
-The original form of this book is \LaTeX\ source code.  Compiling this
-code has the effect of generating a device-independent representation
-of a textbook, which can be converted to other formats and printed.
-
 This book was typeset by the author using latex, dvips and ps2pdf,
 among other free, open-source programs.
-The LaTeX source for this book is available from
+The \LaTeX\ source for this book is available from
 \url{http://greenteapress.com/matlab}.
 
 MATLAB\myreg is a registered trademark of The
@@ -216,7 +205,7 @@ Unported License, which is available at
 \setcounter{chapter}{-1}
 
 \end{htmlonly}
-\chapter {Preface to Version 2.0}
+\chapter {Preface to Version 2.1.0}
  {\itshape Physical Modeling in MATLAB}'s first edition was published in
 January 2008. Credit must be give to the original author, Allen B. Downey,
 for his initial work, and his many updates to the book. Credit must also be
@@ -339,13 +328,15 @@ code examples look better.
 
 \item Craig Scratchley led a project to produce a significantly
 revised version of this book, with the help of SFU students Zhen, Zavier,
-and Michael (as below).
+Michael, and Matt (as below).
 
 \item Zhen Gang Xiao synchronized MATLAB output with R2016b.
 
 \item Zavier Patrick Aguila consistently numbered equations.
 
 \item Michael Cline put in support for PDF bookmarks.
+
+\item Matt Wiens wrote a few additional sections for the book.
 
 \end{itemize}
 
